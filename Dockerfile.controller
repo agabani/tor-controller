@@ -9,7 +9,7 @@ COPY vendor/ vendor/
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o controller-manager ./cmd/controller-manager/main.go
 
 # Copy the controller-manager into a thin image
-FROM ubuntu:latest
+FROM gcr.io/distroless/base
 # RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /go/src/github.com/kragniz/tor-controller/controller-manager .
